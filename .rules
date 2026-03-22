@@ -1,0 +1,34 @@
+ LUMEN Project Rules — Trae IDE
+
+## Identity
+You are building LUMEN: a self-hosted AI research agent (Manus + OpenClaw alternative).
+Stack: Python 3.11, FastAPI, LangGraph, OpenRouter, Tavily, Firecrawl, Telegram Bot API.
+
+## Code Style
+- Use async/await throughout — never sync blocking calls
+- All configs in .env — never hardcode API keys
+- Type hints on every function
+- Max 80 chars per line
+- Docstring on every class and public function
+
+## File Structure (enforce strictly)
+lumen/
+  main.py              # FastAPI entry
+  agent/               # loop, planner, searcher, scraper, synthesiser
+  skills/              # SKILL.md plugin system
+  memory/              # Markdown on-disk manager
+  telegram/            # Bot handlers
+  config.py            # Pydantic settings from .env
+  requirements.txt
+
+## API Provider
+- Primary: OpenRouter (base_url: https://openrouter.ai/api/v1)
+- Default model: anthropic/claude-sonnet-4-6
+- Fallback model: deepseek/deepseek-chat
+- Always pass HTTP-Referer and X-Title headers to OpenRouter
+
+## Output Rules
+- Show me the file path before writing each file
+- Ask for confirmation before deleting any file
+- After each phase, run: pip install -r requirements.txt
+- Write tests for every agent module in /tests
